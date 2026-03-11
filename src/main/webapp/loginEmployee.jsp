@@ -63,6 +63,14 @@ button:hover{
 
 <form action="EmployeeLogin" method="post">
 
+
+<% if(request.getAttribute("msg")!=null){ %>
+<h3>
+<%=request.getAttribute("msg")%>
+</h3>
+
+<%} %>
+
 <label>Email</label>
 <input type="email" name="email" placeholder="Enter your email" required>
 

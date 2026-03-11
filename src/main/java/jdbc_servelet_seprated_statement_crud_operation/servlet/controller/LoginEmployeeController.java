@@ -30,16 +30,16 @@ public class LoginEmployeeController  extends HttpServlet{
 			else
 			{
 			  RequestDispatcher dispatcher=req.getRequestDispatcher("loginEmployee.jsp");
-			
-			  writer.write("<html><body><h4 style='color:red;'>Given Password is Incorrect</h4></body></html>");
+			  req.setAttribute("msg", "something went wrong check your password");
+//			  writer.write("<html><body><h4 style='color:red;'>Given Password is Incorrect</h4></body></html>");
 			  dispatcher.include(req, resp);
 			}
 		}
 		else
 		{
 			RequestDispatcher dispatcher=req.getRequestDispatcher("loginEmployee.jsp");
-			 
-			  writer.write("<html><body><h4 style='color:red;'>Given Email is Incorrect</h4></body></html>");
+			 req.setAttribute("msg", "something went wrong check your email");
+//			  writer.write("<html><body><h4 style='color:red;'>Given Email is Incorrect</h4></body></html>");
 			  dispatcher.include(req, resp);
 		}
 	}
