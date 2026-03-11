@@ -288,4 +288,27 @@ public class EmployeeDao {
 			return null;
 		}
 	}
-}
+		public boolean updateEmployeeByIdDao(Employee employee) {
+
+			String updateEmployeeByIdQuery = "update employee set name=?, email=?,password=?, phone=? ,dob=? ,doj=? where id=?";
+
+			try {
+				PreparedStatement ps = connection.prepareStatement(updateEmployeeByIdQuery);
+
+				ps.setString(1, employee.getName());
+				ps.setString(2, employee.getEmail());
+				ps.setString(3, employee.getPassword());
+				ps.setLong(4, employee.getPhone());
+				ps.setObject(5, employee.getDob());
+				ps.setObject(6, employee.getDoj());
+				ps.setInt(7,employee.getId());
+
+				return ps.executeUpdate() != 0 ? true : false;
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+
+	}
