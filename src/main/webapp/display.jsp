@@ -15,6 +15,7 @@
 <style>
 body {
 	font-family: Arial, Helvetica, sans-serif;
+
 	background: #f4f6f9;
 	text-align: center;
 }
@@ -74,14 +75,20 @@ a:hover {
 
 <body>
 
+	<% 
+  HttpSession httpsession=request.getSession();
+  if(httpsession.getAttribute("EmployeeLogin")!=null)
+  {
+%>
+
 	<h3>Employee Details</h3>
-	 
+
 	<table border="1">
 		<tr>
 			<th>Id</th>
 			<th>Name</th>
 			<th>Email</th>
-			<th>Phone</th>
+			<th>Phone</th>s
 			<th>Dob</th>
 			<th>Doj</th>
 			<th colspan="2">Action</th>
@@ -101,13 +108,27 @@ a:hover {
 			<td><%=employee.getPhone()%></td>
 			<td><%=employee.getDob()%></td>
 			<td><%=employee.getDoj()%></td>
-			<td><a href="updateEmployee.jsp?id=<%=employee.getId() %>" class="update">Update</a></td>
-			<td><a href="deleteEmployee?id=<%=employee.getId()%>" class="delete">Delete</a></td>
+			<td><a href="updateEmployee.jsp?id=<%=employee.getId() %>"
+				class="update">Update</a></td>
+			<td><a href="deleteEmployee?id=<%=employee.getId()%>"
+				class="delete">Delete</a></td>
 		</tr>
 
 		<% } %>
 
 	</table>
+
+	<%}else{ 
+		request.setAttribute("msg","session expired login again.....");
+		RequestDispatcher dispacher=request.getRequestDispatcher("loginEmployee.jsp");
+		dispacher.include(request,response);
+		%>
+ 
+<%} %>
+    
+
+
+
 
 </body>
 </html>

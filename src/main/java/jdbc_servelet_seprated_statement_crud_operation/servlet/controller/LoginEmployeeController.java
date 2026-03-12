@@ -8,6 +8,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jdbc_servelet_seprated_statement_crud_operation.dao.EmployeeDao;
 import jdbc_servelet_seprated_statement_crud_operation.dto.Employee;
 
@@ -19,12 +20,15 @@ public class LoginEmployeeController  extends HttpServlet{
 		EmployeeDao dao=new EmployeeDao();
 		Employee employee=dao.getEmployeeByEmailDao(email);
 		 PrintWriter writer=resp.getWriter();
-		
+		 
+				
 		if(employee!=null)
 		{
 			if(employee.getPassword().equals(password))
 			{
 			RequestDispatcher dispatcher= req.getRequestDispatcher("display.jsp");
+			 HttpSession session=req.getSession();
+			session.setAttribute("EmployeeLogin", employee.getEmail());
 			dispatcher.forward(req, resp);
 			}
 			else
